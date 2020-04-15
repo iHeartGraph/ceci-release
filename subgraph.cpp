@@ -274,7 +274,6 @@ void subgraph::distributedQueryProc()
 		int thid = 0;
 		MPI_Status status;
 		for(;;){
-			//printf("LADO!!!\n");
 			numberOfEmbeddings_sngl = 0;
 			//Receive the work
 			MPI_Recv(&mywork[0], 10, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
