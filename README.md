@@ -1,37 +1,50 @@
-## Welcome to GitHub Pages
+# ceci-release
+Source Code for "CECI: Compact Embedding Cluster Index for Scalable Subgraph Matching"
 
-You can use the [editor on GitHub](https://github.com/iHeartGraph/ceci-release/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Introduction
+CECI is a subgraph matching system that works for undirected query/data graphs with vertex labels. It uses subgraph isomorphism as the embedding syntax and utilizes multiple threads to speed up the listing process. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Data and Query Graph Format
+The graphs are represented with vertex and edge lists concatenated in single file. Following example shows file representing a Triangle i.e., qg1.
 
 ```markdown
-Syntax highlighted code block
+t # 0
+v 0 -1
+v 1 -1
+v 2 -1
+e 0 1 0
+e 1 2 0
+e 2 0 0
+```
+The line starting with 't' represents the graph identifier. For a file containing single graph, this can simply be used as it is.
 
-# Header 1
-## Header 2
-### Header 3
+The line starting with 'v' are the vertices of the graph. The first number following 'v' is vertex identifier and the second number is identifier for vertex label. 
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+The line starting with 'e' are the edges of the graph. The remaining three numbers are first endpoint, second endpoint and label of the edge respectively. The edges are undirected, which means graph traversal can occur in bothe direction between two endpoints. An expmple data graph (dg) is shown below.
+```markdown
+t # 0
+v 0 0
+v 1 0
+v 2 0
+v 3 0
+v 4 0
+e 0 1 0
+e 0 2 0
+e 0 3 0
+e 0 4 0
+e 1 2 0
+e 1 3 0
+e 1 4 0
+e 2 3 0
+e 2 4 0
+e 3 4 0
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Running CECI 
+Once you compile the CECI, it should result in a binary named **ceci**. **ceci** only needs 2 additional inputs i.e. **a data graph** and **a query graph**.
+```markdown
+./ceci ./dg ./qg1 
+```
+Sample datasets, queries and scripts are included in the repository.
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/iHeartGraph/ceci-release/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+For any help, enquiries and comments, please contact me at bhattarai_b@gwu.edu 
